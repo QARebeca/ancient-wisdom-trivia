@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171326">
+  <meta name="description" content="Explore geography, spirituality, history, science and nature in Ancient Wisdom Trivia.">
+  <title>Ancient Wisdom Trivia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="cosmos" aria-hidden="true">
+    <div class="orb orb-one"></div><div class="orb orb-two"></div>
+    <div class="starfield">✧　·　✦　　　·　✧　　✦　　·　　　✧</div>
+  </div>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" id="homeBrand" aria-label="Ancient Wisdom Trivia home">
+        <span class="brand-mark">✧</span><span>ANCIENT WISDOM <small>TRIVIA</small></span>
+      </a>
+      <button class="quiet-button" id="leaderboardTop" type="button">✧ Hall of Wisdom</button>
+    </header>
+
+    <section class="screen active" id="homeScreen">
+      <div class="hero">
+        <div class="eyebrow"><span></span> A JOURNEY THROUGH KNOWLEDGE <span></span></div>
+        <div class="sacred-seal" aria-hidden="true"><div class="seal-inner">✧</div></div>
+        <h1>Ancient Wisdom<br><em>Trivia</em></h1>
+        <p class="hero-copy">Explore the mysteries of our world. Discover the wisdom of ancient civilizations, the wonders of nature, and the patterns that connect us all.</p>
+        <div class="home-actions">
+          <button class="primary-button" id="beginButton">Begin your journey <span>→</span></button>
+          <button class="secondary-button" id="viewScoresButton">View Hall of Wisdom</button>
+        </div>
+        <div class="category-preview">
+          <div><span>⌖</span> Geography</div><div><span>☼</span> Spirituality</div><div><span>𓂀</span> History</div><div><span>✺</span> Science & Nature</div>
+        </div>
+      </div>
+      <footer class="home-footer">FOLLOW CURIOSITY · HONOR WISDOM · KEEP WONDERING</footer>
+    </section>
+
+    <section class="screen" id="setupScreen">
+      <div class="section-heading">
+        <div class="eyebrow">PREPARE FOR THE JOURNEY</div>
+        <h2>Choose your path</h2>
+        <p>Shape a round that matches your curiosity.</p>
+      </div>
+      <div class="setup-card">
+        <h3>01 / Choose a realm</h3>
+        <div class="category-grid" id="categoryGrid">
+          <button class="category-card selected" data-category="All"><span class="cat-icon">✧</span><b>All realms</b><small>A little of everything</small></button>
+          <button class="category-card" data-category="Geography"><span class="cat-icon">⌖</span><b>Geography</b><small>Earth and its places</small></button>
+          <button class="category-card" data-category="Spirituality"><span class="cat-icon">☼</span><b>Spirituality</b><small>Wisdom and traditions</small></button>
+          <button class="category-card" data-category="History"><span class="cat-icon">𓂀</span><b>History</b><small>Civilizations and time</small></button>
+          <button class="category-card" data-category="Science & Nature"><span class="cat-icon">✺</span><b>Science & Nature</b><small>Life and the cosmos</small></button>
+        </div>
+        <div class="setup-row">
+          <div class="setup-field">
+            <h3>02 / Choose a level</h3>
+            <div class="segmented" id="difficultyChoices">
+              <button class="selected" data-difficulty="Mixed">Mixed</button>
+              <button data-difficulty="Easy">Seeker</button>
+              <button data-difficulty="Medium">Explorer</button>
+              <button data-difficulty="Hard">Sage</button>
+            </div>
+          </div>
+          <div class="setup-field">
+            <h3>03 / Questions per round</h3>
+            <div class="segmented" id="countChoices">
+              <button data-count="5">5</button><button class="selected" data-count="10">10</button><button data-count="15">15</button>
+            </div>
+          </div>
+        </div>
+        <label class="name-label" for="playerName">Your name <span>(for the Hall of Wisdom)</span></label>
+        <input id="playerName" maxlength="18" placeholder="Enter your name" autocomplete="nickname">
+        <button class="primary-button wide" id="startRoundButton">Enter the temple <span>→</span></button>
+      </div>
+      <button class="back-link" id="backHome">← Return to the beginning</button>
+    </section>
+
+    <section class="screen" id="quizScreen">
+      <div class="quiz-topline">
+        <button class="back-link" id="quitRound">← Leave round</button>
+        <div class="round-label" id="roundLabel">ROUND 01</div>
+        <div class="score-chip">✧ <span id="liveScore">0</span> pts</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="question-meta"><span id="questionCategory">GEOGRAPHY</span><span id="questionDifficulty">SEEKER</span></div>
+      <div class="question-card">
+        <div class="question-number" id="questionNumber">QUESTION 01 / 10</div>
+        <h2 id="questionText">Question text appears here?</h2>
+        <div class="answer-list" id="answerList"></div>
+        <div class="feedback" id="feedback" aria-live="polite" hidden>
+          <div class="feedback-title" id="feedbackTitle"></div>
+          <p id="feedbackExplanation"></p>
+          <button class="primary-button" id="nextQuestionButton">Continue <span>→</span></button>
+        </div>
+      </div>
+      <p class="gentle-reminder">Take a breath. Let curiosity be your compass.</p>
+    </section>
+
+    <section class="screen" id="resultsScreen">
+      <div class="results-card">
+        <div class="eyebrow">YOUR JOURNEY IS COMPLETE</div>
+        <div class="result-emblem">✧</div>
+        <h2 id="resultHeading">Well explored.</h2>
+        <p id="resultSubheading">Every question is a doorway.</p>
+        <div class="score-ring"><div><strong id="finalScore">0</strong><span>POINTS</span></div></div>
+        <div class="result-stats">
+          <div><strong id="correctCount">0</strong><span>Correct</span></div>
+          <div><strong id="accuracy">0%</strong><span>Accuracy</span></div>
+          <div><strong id="bestStreak">0</strong><span>Best streak</span></div>
+        </div>
+        <p class="result-message" id="resultMessage"></p>
+        <div class="results-actions">
+          <button class="primary-button" id="playAgainButton">Another round <span>→</span></button>
+          <button class="secondary-button" id="resultsLeaderboard">Hall of Wisdom</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="leaderboardScreen">
+      <div class="section-heading">
+        <div class="eyebrow">YOUR PATH LEAVES A TRACE</div>
+        <h2>Hall of Wisdom</h2>
+        <p>Your best journeys, kept on this device.</p>
+      </div>
+      <div class="leaderboard-card">
+        <div class="leaderboard-head"><span>RANK / SEEKER</span><span>SCORE</span><span>ACCURACY</span></div>
+        <div id="leaderboardRows"></div>
+        <div class="empty-leaderboard" id="emptyLeaderboard">Your first adventure awaits. Complete a round to be welcomed here.</div>
+      </div>
+      <div class="leaderboard-actions"><button class="primary-button" id="leaderboardPlay">Start a round <span>→</span></button><button class="back-link" id="leaderboardBack">← Back</button></div>
+      <p class="local-note">Scores are saved only in this browser using local storage. They are not uploaded or shared with anyone.</p>
+      <button class="clear-scores" id="clearScores">Clear scores on this device</button>
+    </section>
+    <footer class="site-footer">ANCIENT WISDOM TRIVIA <span>✧</span> MADE FOR THE JOY OF DISCOVERY</footer>
+  </main>
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
