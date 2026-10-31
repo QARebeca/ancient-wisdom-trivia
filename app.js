@@ -16,30 +16,17 @@
   }
   function saveScore(entry) {
     const scores = getScores();
-    // Buscar si ya existe un registro con el mismo nombre de jugador
     const existingIndex = scores.findIndex(s => s.name.toLowerCase() === entry.name.toLowerCase());
     
     if (existingIndex !== -1) {
-      // Si ya existe, actualizamos su puntaje solo si el nuevo es mayor o igual
+      // Mantiene el registro y actualiza solo si el puntaje nuevo es mayor o igual
       if (entry.score >= scores[existingIndex].score) {
-        scores[existingIndex].score = entry.score;
-        scores[existingIndex].accuracy = entry.accuracy;
-        scores[existingIndex].correct = entry.correct;
-        scores[existingIndex].total = entry.total;
-        scores[existingIndex].category = entry.category;
-        scores[existingIndex].difficulty = entry.difficulty;
-        scores[existingIndex].date = entry.date; // Actualizamos a la fecha más reciente
+        scores[existingIndex] = entry;
       }
     } else {
-      // Si es un jugador totalmente nuevo, lo agregamos
       scores.push(entry);
     }
     
-    // Ordenar de mayor a menor puntaje
-    scores.sort((a, b) => b.score - a.score || b.accuracy - a.accuracy || b.date - a.date);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(scores.slice(0, 50)));
-  }
-    // Ordenar de mayor a menor puntaje
     scores.sort((a, b) => b.score - a.score || b.accuracy - a.accuracy || b.date - a.date);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(scores.slice(0, 50)));
   }
@@ -166,8 +153,9 @@
 
   $("beginButton").addEventListener("click", () => showScreen("setupScreen"));
   $("homeBrand").addEventListener("click", e => { e.preventDefault(); showScreen("homeScreen"); });
+  
+  // Protección en el Hall of Fame para no perder partidas en curso
   $("leaderboardTop").addEventListener("click", () => {
-    // Si estamos en plena partida, preguntamos antes de salir para no perder el progreso
     if ($("quizScreen").classList.contains("active")) {
       if (confirm("Leave this round? Your progress in this round will not be saved.")) {
         renderLeaderboard();
@@ -178,6 +166,7 @@
       showScreen("leaderboardScreen");
     }
   });
+
   $("viewScoresButton").addEventListener("click", () => { renderLeaderboard(); showScreen("leaderboardScreen"); });
   $("backHome").addEventListener("click", () => showScreen("homeScreen"));
   $("categoryGrid").addEventListener("click", e => {
