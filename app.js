@@ -166,7 +166,18 @@
 
   $("beginButton").addEventListener("click", () => showScreen("setupScreen"));
   $("homeBrand").addEventListener("click", e => { e.preventDefault(); showScreen("homeScreen"); });
-  $("leaderboardTop").addEventListener("click", () => { renderLeaderboard(); showScreen("leaderboardScreen"); });
+  $("leaderboardTop").addEventListener("click", () => {
+    // Si estamos en plena partida, preguntamos antes de salir para no perder el progreso
+    if ($("quizScreen").classList.contains("active")) {
+      if (confirm("Leave this round? Your progress in this round will not be saved.")) {
+        renderLeaderboard();
+        showScreen("leaderboardScreen");
+      }
+    } else {
+      renderLeaderboard();
+      showScreen("leaderboardScreen");
+    }
+  });
   $("viewScoresButton").addEventListener("click", () => { renderLeaderboard(); showScreen("leaderboardScreen"); });
   $("backHome").addEventListener("click", () => showScreen("homeScreen"));
   $("categoryGrid").addEventListener("click", e => {
