@@ -20,15 +20,25 @@
     const existingIndex = scores.findIndex(s => s.name.toLowerCase() === entry.name.toLowerCase());
     
     if (existingIndex !== -1) {
-      // Si ya existe, guardamos el puntaje más alto obtenido
-      if (entry.score > scores[existingIndex].score) {
-        scores[existingIndex] = entry;
+      // Si ya existe, actualizamos su puntaje solo si el nuevo es mayor o igual
+      if (entry.score >= scores[existingIndex].score) {
+        scores[existingIndex].score = entry.score;
+        scores[existingIndex].accuracy = entry.accuracy;
+        scores[existingIndex].correct = entry.correct;
+        scores[existingIndex].total = entry.total;
+        scores[existingIndex].category = entry.category;
+        scores[existingIndex].difficulty = entry.difficulty;
+        scores[existingIndex].date = entry.date; // Actualizamos a la fecha más reciente
       }
     } else {
-      // Si es un jugador nuevo, lo agregamos a la lista
+      // Si es un jugador totalmente nuevo, lo agregamos
       scores.push(entry);
     }
     
+    // Ordenar de mayor a menor puntaje
+    scores.sort((a, b) => b.score - a.score || b.accuracy - a.accuracy || b.date - a.date);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(scores.slice(0, 50)));
+  }
     // Ordenar de mayor a menor puntaje
     scores.sort((a, b) => b.score - a.score || b.accuracy - a.accuracy || b.date - a.date);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(scores.slice(0, 50)));
