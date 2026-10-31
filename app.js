@@ -16,7 +16,20 @@
   }
   function saveScore(entry) {
     const scores = getScores();
-    scores.push(entry);
+    // Buscar si ya existe un registro con el mismo nombre de jugador
+    const existingIndex = scores.findIndex(s => s.name.toLowerCase() === entry.name.toLowerCase());
+    
+    if (existingIndex !== -1) {
+      // Si ya existe, guardamos el puntaje más alto obtenido
+      if (entry.score > scores[existingIndex].score) {
+        scores[existingIndex] = entry;
+      }
+    } else {
+      // Si es un jugador nuevo, lo agregamos a la lista
+      scores.push(entry);
+    }
+    
+    // Ordenar de mayor a menor puntaje
     scores.sort((a, b) => b.score - a.score || b.accuracy - a.accuracy || b.date - a.date);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(scores.slice(0, 50)));
   }
